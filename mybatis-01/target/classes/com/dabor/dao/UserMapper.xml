@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=指定一个对应的Dao/Mapper接口-->
+<mapper namespace="com.dabor.dao.UserMapper">
+    <select id="getUserList" resultType="com.dabor.pojo.User">
+    select * from mybatis.user
+  </select>
+
+    <select id="getUserById" resultType="com.dabor.pojo.User" parameterType="int">
+        select * from mybatis.user where id = #{id} and name = #{name}
+    </select>
+
+    <select id="getUserById2" parameterType="map" resultType="com.dabor.pojo.User">
+        select * from mybatis.user where id = #{userid}
+    </select>
+
+<!--对象中的属性可用直接取出来-->
+    <insert id="addUser" parameterType="com.dabor.pojo.User">
+        insert into mybatis.user(id, name, pwd) value (#{id},#{name},#{pwd})
+    </insert>
+
+    <select id="getUserLike" resultType="com.dabor.pojo.User">
+        select * from mybatis.user where name like "%"#{value}"%";
+    </select>
+
+    <insert id="addUser2" parameterType="map">
+        insert into mybatis.user(id,pwd) value (#{userid},#{password})
+    </insert>
+
+    <update id="updateUser" parameterType="com.dabor.pojo.User" >
+        update mybatis.user set name = #{name},pwd = #{pwd} where id = #{id};
+    </update>
+
+    <delete id="deleteUser" parameterType="int">
+        delete from mybatis.user where id=#{id}
+    </delete>
+    <!--对象中的属性可用直接取出来   传递Map的key-->
+
+
+</mapper>
